@@ -1,16 +1,21 @@
 const exceljs = require('exceljs');
 const fs = require('fs');
 const path = require('path');
-let treeFormatter = require('./treeFormatter');
 
-let sampleJsonNormal = require('./sampleJsonDefault');
-let sampleJson = require('./sampleJson');
-let sheetName = 'sheet1'
+let treeFormatter = require('./json2ExcelTreeFormatter');
 
+let sampleJsonDefault = require('./sampleJsonDefault');
+let sampleJsonCustom = require('./sampleJsonCustom');
+let sampleJsonTree = require('./sampleJsonTree');
+
+/**
+ * Sheet Information
+ */
+let sheetName = sampleJsonTree.config.sheetName;
 let workbook = new exceljs.Workbook();
 let sheet = workbook.addWorksheet(sheetName);
 
-let { header, cellData } = treeFormatter.formatTree(sampleJson);
+let { header, cellData } = treeFormatter.formatTree(sampleJsonTree.data);
 
 // Remove Duplicate from header, key should be unique
 let jsonObj = header.map(JSON.stringify);
@@ -18,8 +23,8 @@ let uniqSet = new Set(jsonObj);
 let rmDupl = Array.from(uniqSet).map(JSON.parse);
 sheet.columns = rmDupl;
 cellData.map((rowData) => sheet.addRow(rowData));
-console.log(header);
-console.log(cellData);
+// console.log(header);
+// console.log(cellData);
 let loadDataInCell = () => {
 
 }
@@ -28,39 +33,25 @@ sheet.eachRow((row, rowNum) => {
     row.eachCell((cell, colNum) => {
         cell.alignment = { wrapText: true }
         if(rowNum > 1) {
+            if(cell.value.data.style) {
+                cell.font = cell.value.data.style.font;
+                cell.fill = cell.value.data.style.fill;
+            }
             if(cell.value.type == 'link') {
                 cell.value = {
-                    text: cell.value.name,
-                    hyperlink: cell.value.url,
-                    tooltip: cell.value.url
-                }
-                cell.font = {
-                    color: { argb: 'EB0D2F' },
-                    size: 11,
-                    italic: true
+                    text: cell.value.data.text,
+                    hyperlink: cell.value.data.hyperLink,
+                    tooltip: cell.value.data.toolTip
                 }
             } else {
-                cell.value = cell.value.name;
-                cell.font = {
-                    color: { argb: '000000' },
-                    size: 11,
-                    bold: true
-                }
+                cell.value = cell.value.data.text;
             }
         }
     });
 });
 
-sheet.getRow('1').fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'F7F30C'}
-}
-sheet.getRow('1').font = {
-    color: { argb: '00000' },
-    size: 14,
-    bold: true
-}
+sheet.getRow('1').fill = sampleJsonTree.config.headerStyle.fill;
+sheet.getRow('1').font = sampleJsonTree.config.headerStyle.font;
 
 workbook.creator = 'sathishkumarnagarajan@hotmail.com';
 workbook.lastModifiedBy = 'sathishkumarnagarajan@hotmail.com';

@@ -11,7 +11,10 @@ let recursiveNode = (node, firstLoop=false) => {
         });
         // data
         cellData.push({
-            level_1: `${node.name}`
+            level_1: {
+                data: node.value,
+                level: 1
+            }
         });
     } else {
         columns.push({
@@ -21,10 +24,8 @@ let recursiveNode = (node, firstLoop=false) => {
         });
         let cellDataObj = {};
         cellDataObj[`level_${node['level']}`] = {
-            name: node.name,
             type: node.type,
-            url: node.url,
-            style: node.style,
+            data: node.value,
             level: node.level
         };
         cellData.push(cellDataObj);
