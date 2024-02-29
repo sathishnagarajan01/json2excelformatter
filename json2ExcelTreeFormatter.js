@@ -1,11 +1,12 @@
 let columns = [];
 let cellData = [];
 let parentLevel = 1;
-let recursiveNode = (node, firstLoop=false) => {
+let recursiveNode = (node, headerName=false, firstLoop=false) => {
+    if(!headerName) headerName = 'Level';
     if(firstLoop) {
         // header of root
         columns.push({
-            header: `Level 1 Node`,
+            header: `${headerName} 1`,
             key: `level_1`,
             width: 30
         });
@@ -18,7 +19,7 @@ let recursiveNode = (node, firstLoop=false) => {
         });
     } else {
         columns.push({
-            header: `Level ${node['level']} Node`,
+            header: `${headerName} ${node['level']}`,
             key: `level_${node['level']}`,
             width: 30
         });
@@ -34,7 +35,7 @@ let recursiveNode = (node, firstLoop=false) => {
         parentLevel = node['level'] ? node['level'] : parentLevel;
         for(let child of node.children) {
             child['level'] = parentLevel+1;
-            recursiveNode(child, false);
+            recursiveNode(child, headerName, false);
         }
         if(!firstLoop) --parentLevel;
     } else {
@@ -46,8 +47,8 @@ let recursiveNode = (node, firstLoop=false) => {
     }
 }
 
-let formatTree = (sampleJson) => {
-    recursiveNode(sampleJson, true);
+let formatTree = (sampleJson, headerName) => {
+    recursiveNode(sampleJson, headerName, true);
     return {
         header: columns,
         cellData

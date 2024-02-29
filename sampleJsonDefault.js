@@ -1,7 +1,19 @@
 module.exports = {
     config: {
         dataFormat: 'default', // tree -> if parent child means // custom -> if need to custom style //
-        sheetName: 'sheet1'
+        sheetName: 'sheet1',
+        headerStyle: {
+            fill: {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'F7F30C'}
+            },
+            font: {
+                color: { argb: '00000' },
+                size: 14,
+                bold: true
+            }
+        }
     },
     data: {
         header: [

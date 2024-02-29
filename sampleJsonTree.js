@@ -13,7 +13,8 @@ module.exports = {
                 size: 14,
                 bold: true
             }
-        }
+        },
+        headerName: 'LEVEL'
     },
     data: {
         type: 'text',
