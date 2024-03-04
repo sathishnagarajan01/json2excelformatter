@@ -2,7 +2,10 @@ node_modules/
 node_modules/*
 /node_modules
 
-/dist
+/src
 .env
 *.xlsx
 .DS_Store
+
+tsconfig.json
+tsup.config.ts

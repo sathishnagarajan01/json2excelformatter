@@ -1,4 +1,4 @@
-module.exports = {
+export const sampleTree = {
     config: {
         dataFormat: 'tree', // custom -> if need to custom style // default -> for normal array of object
         sheetName: 'sheet1',

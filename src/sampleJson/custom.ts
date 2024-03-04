@@ -1,4 +1,4 @@
-module.exports = {
+export const sampleCustom = {
     config: {
         dataFormat: 'custom', // tree -> if parent child means // default -> for normal array of object
         sheetName: 'sheet1',

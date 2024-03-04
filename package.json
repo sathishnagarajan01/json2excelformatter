@@ -1,14 +1,37 @@
 {
-  "name": "json2excelfomatter",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Sathish Kumar Nagarajan <nsathishkumarnagarajan@gmail.com>",
-  "license": "ISC",
-  "dependencies": {
-    "exceljs": "^4.4.0"
-  }
+	"name": "json2excelfomatter",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"module": "dist/index.mjs",
+	"scripts": {
+		"build": "tsc",
+		"start": "nodemon --exec ts-node src/index.ts"
+	},
+	"repository": {
+		"type": "github",
+		"url": "https://github.com/sathishnagarajan01/json2excelformatter"
+	},
+	"keywords": [
+		"json2excel",
+		"excel converter",
+		"json2excel formatter",
+		"json2excel tree",
+		"convert json to excel",
+		"convert tree json to excel",
+		"customized json to excel"
+	],
+	"author": "Sathish Kumar Nagarajan <nsathishkumarnagarajan@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"exceljs": "^4.4.0"
+	},
+	"homepage": "https://github.com/sathishnagarajan01/json2excelformatter/blob/main/README.md",
+	"devDependencies": {
+		"@types/node": "^20.11.24",
+		"nodemon": "^3.1.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.3.3"
+	}
 }
