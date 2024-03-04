@@ -5,4 +5,4 @@ import { sampleDefault } from './sampleJson/default';
 import { sampleCustom } from './sampleJson/custom';
 
 
-excelJsConvertion.initProcess(sampleTree.config, sampleTree.data);
+excelJsConvertion.initProcess(sampleCustom.config, sampleCustom.data);

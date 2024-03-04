@@ -18,9 +18,11 @@ class ExceljsConvertion {
     async formattingData(dataFormat: string, data: any, headerName?: string) {
         switch(dataFormat) {
             case 'default':
-                return defaultFormat.startFormat(data);
+                await defaultFormat.startFormat(data);
+                return await defaultFormat.getFormat();
             case 'custom':
-                return customFormat.startFormat(data);
+                await customFormat.startFormat(data);
+                return await customFormat.getFormat();
             case 'tree':
                 await treeFormat.startFormat(data, headerName);
                 return await treeFormat.getFormat();
@@ -47,26 +49,28 @@ class ExceljsConvertion {
         // console.log(header);
         // console.log(cellData);
     
-        sheet.eachRow((row: any, rowNum: any) => {
-            row.eachCell((cell: any, colNum: any) => {
-                cell.alignment = { wrapText: true }
-                if(rowNum > 1) {
-                    if(cell.value.data.style) {
-                        cell.font = cell.value.data.style.font;
-                        cell.fill = cell.value.data.style.fill;
-                    }
-                    if(cell.value.type == 'link') {
-                        cell.value = {
-                            text: cell.value.data.text,
-                            hyperlink: cell.value.data.hyperLink,
-                            tooltip: cell.value.data.toolTip
+        if(dataFormat != 'default') {
+            sheet.eachRow((row: any, rowNum: any) => {
+                row.eachCell((cell: any, colNum: any) => {
+                    cell.alignment = { wrapText: true }
+                    if(rowNum > 1) {
+                        if(cell.value.data.style) {
+                            cell.font = cell.value.data.style.font;
+                            cell.fill = cell.value.data.style.fill;
                         }
-                    } else {
-                        cell.value = cell.value.data.text;
+                        if(cell.value.type == 'link') {
+                            cell.value = {
+                                text: cell.value.data.text,
+                                hyperlink: cell.value.data.hyperLink,
+                                tooltip: cell.value.data.toolTip
+                            }
+                        } else {
+                            cell.value = cell.value.data.text;
+                        }
                     }
-                }
+                });
             });
-        });
+        }
     
         sheet.getRow(1).fill = headerStyle.fill;
         sheet.getRow(1).font = headerStyle.font;
