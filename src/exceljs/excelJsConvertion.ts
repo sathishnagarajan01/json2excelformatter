@@ -6,7 +6,7 @@ import { treeFormat } from '../formatter/tree';
 import { customFormat } from '../formatter/custom';
 import { defaultFormat } from '../formatter/default';
 
-class ExceljsConvertion {
+export class ExceljsConvertion {
     constructor() {}
 
     /**
@@ -33,57 +33,58 @@ class ExceljsConvertion {
     }
 
     async initProcess(config: config, data: any) {
-        let { sheetName, headerName, headerStyle, dataFormat } = config;
-        let workbook = new exceljs.Workbook();
-        let sheet = workbook.addWorksheet(sheetName);
-    
-        // let { header, cellData } = treeFormatter.formatTree(data);
-        let { header, cellData } = await this.formattingData(dataFormat, data, headerName);
-    
-        // Remove Duplicate from header, key should be unique
-        let jsonObj = header.map(JSON.stringify);
-        let uniqSet = new Set(jsonObj);
-        let rmDupl = Array.from(uniqSet).map((elem: any) => JSON.parse(elem));
-        sheet.columns = rmDupl;
-        cellData.map((rowData: any) => sheet.addRow(rowData));
-        // console.log(header);
-        // console.log(cellData);
-    
-        if(dataFormat != 'default') {
-            sheet.eachRow((row: any, rowNum: any) => {
-                row.eachCell((cell: any, colNum: any) => {
-                    cell.alignment = { wrapText: true }
-                    if(rowNum > 1) {
-                        if(cell.value.data.style) {
-                            cell.font = cell.value.data.style.font;
-                            cell.fill = cell.value.data.style.fill;
-                        }
-                        if(cell.value.type == 'link') {
-                            cell.value = {
-                                text: cell.value.data.text,
-                                hyperlink: cell.value.data.hyperLink,
-                                tooltip: cell.value.data.toolTip
+        try {
+            let { sheetName, headerName, headerStyle, dataFormat } = config;
+            let workbook = new exceljs.Workbook();
+            let sheet = workbook.addWorksheet(sheetName);
+        
+            let { header, cellData } = await this.formattingData(dataFormat, data, headerName);
+        
+            // Remove Duplicate from header, key should be unique
+            let jsonObj = header.map(JSON.stringify);
+            let uniqSet = new Set(jsonObj);
+            let rmDupl = Array.from(uniqSet).map((elem: any) => JSON.parse(elem));
+            sheet.columns = rmDupl;
+            cellData.map((rowData: any) => sheet.addRow(rowData));
+        
+            if(dataFormat != 'default') {
+                sheet.eachRow((row: any, rowNum: any) => {
+                    row.eachCell((cell: any, colNum: any) => {
+                        cell.alignment = { wrapText: true }
+                        if(rowNum > 1) {
+                            if(cell.value.data.style) {
+                                cell.font = cell.value.data.style.font;
+                                cell.fill = cell.value.data.style.fill;
                             }
-                        } else {
-                            cell.value = cell.value.data.text;
+                            if(cell.value.type == 'link') {
+                                cell.value = {
+                                    text: cell.value.data.text,
+                                    hyperlink: cell.value.data.hyperLink,
+                                    tooltip: cell.value.data.toolTip
+                                }
+                            } else {
+                                cell.value = cell.value.data.text;
+                            }
                         }
-                    }
+                    });
                 });
-            });
-        }
-    
-        sheet.getRow(1).fill = headerStyle.fill;
-        sheet.getRow(1).font = headerStyle.font;
+            }
+        
+            sheet.getRow(1).fill = headerStyle.fill;
+            sheet.getRow(1).font = headerStyle.font;
 
-        if (!fs.existsSync('output')){
-            fs.mkdirSync('output');
+            if (!fs.existsSync('output')){
+                fs.mkdirSync('output');
+            }
+        
+            workbook.creator = 'sathishkumarnagarajan@hotmail.com';
+            workbook.lastModifiedBy = 'sathishkumarnagarajan@hotmail.com';
+            workbook.created = new Date();
+            workbook.xlsx.writeFile('output/test.xlsx');
+        } catch(err: any) {
+            throw new Error(err.message);
         }
-    
-        workbook.creator = 'sathishkumarnagarajan@hotmail.com';
-        workbook.lastModifiedBy = 'sathishkumarnagarajan@hotmail.com';
-        workbook.created = new Date();
-        workbook.xlsx.writeFile('output/test.xlsx');
     }
 }
 
-export const excelJsConvertion = new ExceljsConvertion();
+// export const excelJsConvertion = new ExceljsConvertion();

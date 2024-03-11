@@ -1,8 +1,3 @@
-import { excelJsConvertion } from "./exceljs/excelJsConvertion";
+import { ExceljsConvertion } from "./exceljs/excelJsConvertion";
 
-import { sampleTree } from './sampleJson/tree';
-import { sampleDefault } from './sampleJson/default';
-import { sampleCustom } from './sampleJson/custom';
-
-
-excelJsConvertion.initProcess(sampleCustom.config, sampleCustom.data);
+export const json2excelformat = new ExceljsConvertion();

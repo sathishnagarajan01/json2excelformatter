@@ -7,6 +7,7 @@
 	"module": "dist/index.mjs",
 	"scripts": {
 		"build": "tsc",
+		"prepare": "npm run build",
 		"start": "nodemon --exec ts-node src/index.ts"
 	},
 	"repository": {
@@ -24,10 +25,14 @@
 	],
 	"author": "Sathish Kumar Nagarajan <nsathishkumarnagarajan@gmail.com>",
 	"license": "MIT",
+	"homepage": "https://github.com/sathishnagarajan01/json2excelformatter/blob/main/README.md",
+	"bugs": {
+		"url": "https://github.com/sathishnagarajan01/json2excelformatter/issues"
+	},
+	"files": ["dist/**/*"],
 	"dependencies": {
 		"exceljs": "^4.4.0"
 	},
-	"homepage": "https://github.com/sathishnagarajan01/json2excelformatter/blob/main/README.md",
 	"devDependencies": {
 		"@types/node": "^20.11.24",
 		"nodemon": "^3.1.0",
