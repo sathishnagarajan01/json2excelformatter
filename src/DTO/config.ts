@@ -4,5 +4,7 @@ export interface config {
     dataFormat: string,
     sheetName: string,
     headerStyle: style,
-    headerName?: string
+    headerName?: string,
+    creator: string,
+    lastModifiedBy: string
 }

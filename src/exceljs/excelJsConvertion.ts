@@ -1,5 +1,4 @@
 import exceljs from 'exceljs';
-import fs from 'fs';
 import { config } from "../DTO/config";
 
 import { treeFormat } from '../formatter/tree';
@@ -72,15 +71,12 @@ export class ExceljsConvertion {
         
             sheet.getRow(1).fill = headerStyle.fill;
             sheet.getRow(1).font = headerStyle.font;
-
-            if (!fs.existsSync('output')){
-                fs.mkdirSync('output');
-            }
         
-            workbook.creator = 'sathishkumarnagarajan@hotmail.com';
-            workbook.lastModifiedBy = 'sathishkumarnagarajan@hotmail.com';
+            workbook.creator = config.creator;
+            workbook.lastModifiedBy = config.lastModifiedBy;
             workbook.created = new Date();
-            workbook.xlsx.writeFile('output/test.xlsx');
+            return workbook;
+            // workbook.xlsx.writeFile('output/test.xlsx');
         } catch(err: any) {
             throw new Error(err.message);
         }
