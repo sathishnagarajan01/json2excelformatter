@@ -14,7 +14,7 @@ export class ExceljsConvertion {
      * @param {*} data 
      * @returns {*} 
      */
-    async formattingData(dataFormat: string, data: any, headerName?: string) {
+    private async formattingData(dataFormat: string, data: any, headerName?: string) {
         switch(dataFormat) {
             case 'default':
                 await defaultFormat.startFormat(data);
