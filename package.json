@@ -1,6 +1,6 @@
 {
 	"name": "json2excelformatter",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -29,7 +29,9 @@
 	"bugs": {
 		"url": "https://github.com/sathishnagarajan01/json2excelformatter/issues"
 	},
-	"files": ["dist/**/*"],
+	"files": [
+		"dist/**/*"
+	],
 	"dependencies": {
 		"exceljs": "^4.4.0"
 	},
