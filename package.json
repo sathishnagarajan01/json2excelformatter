@@ -4,7 +4,6 @@
 	"description": "",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"module": "dist/index.mjs",
 	"scripts": {
 		"build": "tsc",
 		"prepare": "npm run build",
