@@ -21,7 +21,11 @@ npm install json2excelformatter
 
 ## Example
 ```ts
+// for typescript
 import { json2excelformat } from 'json2excelformatter';
+// for javascript
+const { json2excelformat } = require('json2excelformatter');
+
 import { sampleJson } from './sampleJson';
 
 /**
