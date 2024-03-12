@@ -18,8 +18,11 @@ export interface fill {
 export interface font {
     color?: argb,
     size?: number,
-    bold?: boolean
-    italic?: boolean
+    bold?: boolean,
+    italic?: boolean,
+    strike?: boolean,
+    outline?: boolean,
+    underline?: any
 }
 
 export interface style {

@@ -141,7 +141,11 @@ export const sampleCustom = {
                 type: 'text',
                 value: {
                     text: 'Bhoosan',
-                    style: {},
+                    style: {
+                        font: {
+                            outline: true
+                        }
+                    },
                 },
             },
             address: {
@@ -155,7 +159,8 @@ export const sampleCustom = {
                             color: { argb: 'EB0D2F' },
                             size: 11,
                             italic: true,
-                            bold: true
+                            bold: true,
+                            underline: true
                         },
                         fill: {
                             type: 'pattern',

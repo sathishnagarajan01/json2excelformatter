@@ -57,16 +57,16 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
 
 ### config
  - **config** param contains the basic structure of input data
- - config.dataFormat must be either **default | custom | tree**
- - ***default*** dataFormat is used to generate the plain excel format without any styles
- - ***custom*** dataFormat used to generate excel with styles
-- ***tree*** dataFormat mainly used to create the Parent Child format include styles
+ - **config.dataFormat** must be either `default` | `custom` | `tree`
+ - `default` dataFormat is used to generate the plain excel format without any styles
+ - `custom` dataFormat used to generate excel with styles
+- `tree` dataFormat mainly used to create the Parent Child format include styles
 ```ts
     config: {
         dataFormat: 'default', // tree -> if parent child means // default -> for normal array of object
         sheetName: 'sheet1',
-        creator: 'nsathishkumarnagarajan@gmail.com',
-        lastModifiedBy: 'nsathishkumarnagarajan@gmail.com',
+        creator: 'example@gmail.com',
+        lastModifiedBy: 'example@gmail.com',
         headerStyle: {
             fill: {
                 type: 'pattern',
@@ -83,12 +83,9 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
 ```
 
 ### data
-- ***default*** format data
-```ts
-    [{ name: 'sathish', address: '123street' }]
-```
- - For custom and tree dataFormat every cell object should contains type of value **text | link**
- - ***text*** type:text mentioned for the value of cell is in string format
+ - dataFormat: `default` | `custom` | `tree`
+ - For custom and tree dataFormat every value of cell object should contains type:  `text` | `link`
+ - `text` type:text mentioned for the value of text is in string format
  ```ts
     name: {
         type: 'text',
@@ -97,7 +94,7 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
         },
     }
  ```
- - ***link*** type:link mentioned for cell format as hyperlink, this type expects **hyperLink** and **toolTip**
+ - `link` type:link mentioned for the value of text as string, this type expects **hyperLink** and **toolTip**
  ```ts
     address: {
         type: 'link',
@@ -109,7 +106,7 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
     }
 ```
 
-**default** dataFormat
+`default` data example
 ```ts
     data: {
         header: [
@@ -128,7 +125,7 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
     }
 ```
 
-**custom** dataFormat
+`custom` data example
 ```ts
     data: [
         {
@@ -208,7 +205,7 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
     ]
 ```
 
-***tree*** dataFormat
+`tree` data example
 ```ts
     data: {
         type: 'text',
@@ -312,24 +309,82 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
 ```
 
 ### styles
- - json2excelformatter using the [exceljs][exceljs-url] dependencies to convert the excel
- - Below are the example for design the excel of each cell.
- - Please refer the [exceljs][exceljs-url] documentation for further more customization.
- ```ts
+ - Cells, Rows and Columns each support a rich set of styles and formats that affect how the cells are displayed.
+ - By the help of [exceljs][exceljs-url], json2excelformatter generates the excel and styles.
+- Styles are set by assigning the following properties
+> - font
+> - fill
+
+#### Fonts
+```ts
     style: {
         font: {
             color: { argb: 'EB0D2F' },
             size: 11,
             italic: true,
-            bold: true
-        },
+            bold: true,
+            underline: true,
+            strike: true,
+            outline: true
+        }
+    }
+```
+
+| Font Property | Description       | Example Value(s) |
+| ------------- | ----------------- | ---------------- |
+| size          | Font size. An integer value. | 9, 10, 12, 16, etc. |
+| color         | Colour description, an object containing an ARGB value. | { argb: 'FFFF0000'} |
+| bold          | Font **weight** | true, false |
+| italic        | Font *slope* | true, false |
+| underline     | Font <u>underline</u> style | true, false, 'none', 'single', 'double', 'singleAccounting', 'doubleAccounting' |
+| strike        | Font <strike>strikethrough</strike> | true, false |
+| outline       | Font outline | true, false |
+
+#### Fills
+ - In this library supports only type: `pattern`
+```ts
+    style: {
         fill: {
             type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'F7F30C'}
+            pattern: 'darkTrellis',
+            fgColor: { argb: 'F7F30C' },
+            bgColor: { argb: 'FF0000FF' }
         }
     }
  ```
+
+| Property | Required | Description |
+| -------- | -------- | ----------- |
+| type     | Y        | Value: 'pattern'<br/>Specifies this fill uses patterns |
+| pattern  | Y        | Specifies type of pattern (see `valid-pattern-types` below) |
+| fgColor  | N        | Specifies the pattern foreground color. Default is black. |
+| bgColor  | N        | Specifies the pattern background color. Default is white. |
+
+Note: If you want to fill a cell using the `solid` pattern, then you don't need to specify `bgColor`.
+
+**Valid Pattern Types**
+
+* none
+* solid
+* darkGray
+* mediumGray
+* lightGray
+* gray125
+* gray0625
+* darkHorizontal
+* darkVertical
+* darkDown
+* darkUp
+* darkGrid
+* darkTrellis
+* lightHorizontal
+* lightVertical
+* lightDown
+* lightUp
+* lightGrid
+* lightTrellis
+
+**Note: For further more customization please refer the [exceljs][exceljs-url] documentation**
 
 ## Poople
  - The original author of json2excelformatter is [Sathish Nagarajan][linkedin-url]

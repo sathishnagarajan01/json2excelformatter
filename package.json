@@ -1,5 +1,5 @@
 {
-	"name": "json2excelfomatter",
+	"name": "json2excelformatter",
 	"version": "1.0.0",
 	"description": "",
 	"main": "dist/index.js",
