@@ -34,8 +34,8 @@ import { sampleJson } from './sampleJson';
  * @returns {*} Promise<workbook>
 */
 json2excelformat.initProcess(sampleJson.config, sampleJson.data)
-.then((resp) => {
-    resp.xlsx.writeFile('output/test.xlsx');
+.then((workbook) => {
+    workbook.xlsx.writeFile('test.xlsx');
 })
 .catch((err) => {
     console.log(err);
@@ -210,6 +210,7 @@ json2excelformat.initProcess(sampleJson.config, sampleJson.data)
 ```
 
 `tree` data example
+ - Tree must have root node and also need children atleast as empty array.
 ```ts
     data: {
         type: 'text',

@@ -2,8 +2,8 @@ export const sampleCustom = {
     config: {
         dataFormat: 'custom', // tree -> if parent child means // default -> for normal array of object
         sheetName: 'sheet1',
-        creator: 'nsathishkumarnagarajan@gmail.com',
-        lastModifiedBy: 'nsathishkumarnagarajan@gmail.com',
+        creator: 'example@gmail.com',
+        lastModifiedBy: 'example@gmail.com',
         headerStyle: {
             fill: {
                 type: 'pattern',

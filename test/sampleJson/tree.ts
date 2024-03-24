@@ -2,8 +2,8 @@ export const sampleTree = {
     config: {
         dataFormat: 'tree', // custom -> if need to custom style // default -> for normal array of object
         sheetName: 'sheet1',
-        creator: 'nsathishkumarnagarajan@gmail.com',
-        lastModifiedBy: 'nsathishkumarnagarajan@gmail.com',
+        creator: 'example@gmail.com',
+        lastModifiedBy: 'example@gmail.com',
         headerStyle: {
             fill: {
                 type: 'pattern',
