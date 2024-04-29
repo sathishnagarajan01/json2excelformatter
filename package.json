@@ -21,7 +21,12 @@
 		"json2excel tree",
 		"convert json to excel",
 		"convert tree json to excel",
-		"customized json to excel"
+		"customized json to excel",
+		"json",
+		"excel",
+		"xlsx",
+		"json to excel converter",
+		"json to excel"
 	],
 	"author": "Sathish Kumar Nagarajan <nsathishkumarnagarajan@gmail.com>",
 	"license": "MIT",
